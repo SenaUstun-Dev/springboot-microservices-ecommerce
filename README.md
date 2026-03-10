@@ -40,16 +40,15 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 ```mermaid
 flowchart LR
 
-%% External actor
 Actor((Actor))
 
-%% Main system
 subgraph System["Microservices Architecture"]
 
     Gateway["API Gateway (Resilience4J)"]
     Auth["Auth Server"]
 
     subgraph Services["Internal Services"]
+
         Product["Product Service"]
         ProductDB[(MongoDB)]
 
@@ -62,6 +61,7 @@ subgraph System["Microservices Architecture"]
         Notification["Notification Service"]
 
         Kafka{{Kafka}}
+
     end
 
     Gateway --> Auth
@@ -80,10 +80,6 @@ subgraph System["Microservices Architecture"]
 end
 
 Actor --> Gateway
-
-%% External infrastructure (informational)
-Observability["OpenTelemetry • Prometheus • Grafana • Loki • Tempo"]
-Infra["Kubernetes • Docker"]
 ```
 
 ---
