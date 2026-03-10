@@ -40,52 +40,50 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 ```mermaid
 flowchart LR
 
-%% External Actor
+%% External actor
 Actor((Actor))
 
-%% Main System Boundary
-subgraph System [Microservices Architecture]
-    Gateway[API Gateway<br>🛡️ Resilience4J]
-    Auth[Auth Server]
+%% Main system
+subgraph System["Microservices Architecture"]
 
-    subgraph Services [Internal Services]
-        Product[🔒 Product Service]
-        Order[🔒 Order Service]
-        Inventory[🔒 Inventory Service]
-        Notification[🔒 Notification Service ✉️]
-        
-        DB_P[(MongoDB)]
-        DB_O[(MySQL)]
-        DB_I[(MySQL)]
-        
+    Gateway["API Gateway (Resilience4J)"]
+    Auth["Auth Server"]
+
+    subgraph Services["Internal Services"]
+        Product["Product Service"]
+        ProductDB[(MongoDB)]
+
+        Order["Order Service"]
+        OrderDB[(MySQL)]
+
+        Inventory["Inventory Service"]
+        InventoryDB[(MySQL)]
+
+        Notification["Notification Service"]
+
         Kafka{{Kafka}}
     end
+
+    Gateway --> Auth
+
+    Gateway --> Product
+    Gateway --> Order
+
+    Product --> ProductDB
+    Order --> OrderDB
+    Inventory --> InventoryDB
+
+    Order -->|Sync Communication (Resilience4J)| Inventory
+    Order -.->|Async Communication| Kafka
+    Kafka -.-> Notification
+
 end
 
-%% Infrastructure & Observability Tools
-subgraph Infra [Infrastructure & Observability]
-    direction LR
-    Eureka[🔒 Eureka Service Discovery]
-    K8s[Kubernetes]
-    Obs[OpenTelemetry | Prometheus<br>Grafana | Loki | Tempo]
-end
-
-%% Actor to Gateway Flow
 Actor --> Gateway
 
-%% Gateway Routing
-Gateway --> Product
-Gateway --> Order
-
-%% Service to Database Connections
-Product -.- DB_P
-Order -.- DB_O
-Inventory -.- DB_I
-
-%% Inter-Service Communication (Sync & Async)
-Order -->|Sync Communication<br>🛡️ Resilience4J| Inventory
-Order -.->|Async Communication| Kafka
-Kafka -.->|Async Communication| Notification
+%% External infrastructure (informational)
+Observability["OpenTelemetry • Prometheus • Grafana • Loki • Tempo"]
+Infra["Kubernetes • Docker"]
 ```
 
 ---
