@@ -40,33 +40,52 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 ```mermaid
 flowchart LR
 
-Client[Angular Client]
+%% External Actor
+Actor((Actor))
 
-Gateway[API Gateway<br>Spring Cloud Gateway]
+%% Main System Boundary
+subgraph System [Microservices Architecture]
+    Gateway[API Gateway<br>🛡️ Resilience4J]
+    Auth[Auth Server]
 
-Product[Product Service<br>Spring Boot]
-Order[Order Service<br>Spring Boot]
-Inventory[Inventory Service<br>Spring Boot]
-Notification[Notification Service<br>Spring Boot]
+    subgraph Services [Internal Services]
+        Product[🔒 Product Service]
+        Order[🔒 Order Service]
+        Inventory[🔒 Inventory Service]
+        Notification[🔒 Notification Service ✉️]
+        
+        DB_P[(MongoDB)]
+        DB_O[(MySQL)]
+        DB_I[(MySQL)]
+        
+        Kafka{{Kafka}}
+    end
+end
 
-Kafka[(Kafka Event Bus)]
+%% Infrastructure & Observability Tools
+subgraph Infra [Infrastructure & Observability]
+    direction LR
+    Eureka[🔒 Eureka Service Discovery]
+    K8s[Kubernetes]
+    Obs[OpenTelemetry | Prometheus<br>Grafana | Loki | Tempo]
+end
 
-DB1[(Product DB)]
-DB2[(Order DB)]
-DB3[(Inventory DB)]
+%% Actor to Gateway Flow
+Actor --> Gateway
 
-Client --> Gateway
-
+%% Gateway Routing
 Gateway --> Product
 Gateway --> Order
-Gateway --> Inventory
 
-Product --> DB1
-Order --> DB2
-Inventory --> DB3
+%% Service to Database Connections
+Product -.- DB_P
+Order -.- DB_O
+Inventory -.- DB_I
 
-Order -->|publish order event| Kafka
-Kafka -->|consume event| Notification
+%% Inter-Service Communication (Sync & Async)
+Order -->|Sync Communication<br>🛡️ Resilience4J| Inventory
+Order -.->|Async Communication| Kafka
+Kafka -.->|Async Communication| Notification
 ```
 
 ---
