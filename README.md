@@ -35,53 +35,6 @@ Key goals of this project include:
 
 This project is intended for **learning, experimentation, and portfolio demonstration**.
 
-## 🏗 System Architecture
-
-```mermaid
-flowchart LR
-
-Actor((Actor))
-
-subgraph System["Microservices Architecture"]
-
-    Gateway["API Gateway (Resilience4J)"]
-    Auth["Auth Server"]
-
-    subgraph Services["Internal Services"]
-
-        Product["Product Service"]
-        ProductDB[(MongoDB)]
-
-        Order["Order Service"]
-        OrderDB[(MySQL)]
-
-        Inventory["Inventory Service"]
-        InventoryDB[(MySQL)]
-
-        Notification["Notification Service"]
-
-        Kafka{{Kafka}}
-
-    end
-
-    Gateway --> Auth
-
-    Gateway --> Product
-    Gateway --> Order
-
-    Product --> ProductDB
-    Order --> OrderDB
-    Inventory --> InventoryDB
-
-    Order -->|Sync Communication (Resilience4J)| Inventory
-    Order -.->|Async Communication| Kafka
-    Kafka -.-> Notification
-
-end
-
-Actor --> Gateway
-```
-
 ---
 
 # 🛠 Tech Stack
