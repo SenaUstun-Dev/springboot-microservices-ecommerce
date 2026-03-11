@@ -39,35 +39,40 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 
 # 🛠 Tech Stack
 
-## Backend
+### Backend
 - **Java**
-- **Spring Boot**
-- Spring Web
-- Spring Data JPA
-- Spring Cloud Gateway
-- Resilience4j
-- Spring Kafka
-- Lombok
+- **Spring Boot** (Spring Web, Spring Data JPA, Lombok)
+- **Spring Cloud Gateway** (API Gateway)
+- **Resilience4j**
 
-## Frontend
-- **Angular**
+### Databases
+- **MongoDB**
+- **MySQL**
 
-## Messaging
+### Messaging
 - **Apache Kafka**
 
-## Infrastructure
+### Frontend
+- **Angular**
+
+### Observability
+- **Prometheus**
+- **Grafana**
+- **Loki**
+- **Tempo**
+
+### Infrastructure
 - **Docker**
 - **Kubernetes**
 
-## Security (planned)
-- OAuth2 / Keycloak
+### Security
+- **OAuth2**
+- **Keycloak**
 
-## Build Tool
-- **Maven**
-
-## Testing (planned)
-- JUnit
-- Testcontainers
+### Testing
+- **JUnit**
+- **Testcontainers**
+- **WireMock**
 
 ---
 
