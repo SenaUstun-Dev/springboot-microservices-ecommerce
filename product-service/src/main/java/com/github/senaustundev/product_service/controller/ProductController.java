@@ -3,7 +3,6 @@ package com.github.senaustundev.product_service.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +31,6 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts() {
-        URI location = URI.create("/api/products");
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
