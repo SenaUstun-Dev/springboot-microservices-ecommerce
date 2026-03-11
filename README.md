@@ -17,11 +17,10 @@ Below this readme has:
 
 # 📌 Overview
 
-This repository contains a **microservices architecture practice project** built with **Spring Boot, Kafka, Angular, Docker, and Kubernetes**.
+This repository contains a **ecommerce microservices architecture practice project** build with Spring boot and Angular. It contains of 6 microservices: product-service, order-service, inventory-service, notification-service, api-gateway, frontend. 
 
-The project simulates a simplified **e-commerce platform** where each business domain is implemented as an independent microservice. Services communicate through both **REST APIs (synchronous)** and **Kafka events (asynchronous)**.
-
-The main purpose of this project is to **gain hands-on experience with microservices architecture** and modern backend infrastructure.
+### Goal
+The main purpose of this project is to **gain hands-on experience with microservices architecture** and everthing in the Tech Stack section.
 
 Key goals of this project include:
 
@@ -111,162 +110,70 @@ Some modules may **not yet exist in the repository** and will be **added as deve
 
 # ⚙️ Architecture Flow
 
-General request flow of the system:
-
-```
-Client (Angular)
-        │
-        ▼
-API Gateway
-        │
-        ▼
-Microservices
-│        │        │        │
-Product  Order  Inventory  Notification
-Service  Service  Service   Service
-        │
-        ▼
-Kafka (Event Messaging)
-```
-
-Example order workflow:
-
-1. User places an order from the **frontend**
-2. Request reaches the **API Gateway**
-3. Gateway routes the request to **Order Service**
-4. Order Service checks stock via **Inventory Service**
-5. If successful, an **order event is published to Kafka**
-6. **Notification Service** listens to the event and sends a notification
+**will be added later**
 
 ---
 
 # 🔧 Services
 
-## API Gateway
-
-Acts as the **single entry point** for all client requests.
+## API Gateway(planned)
 
 Responsibilities:
+- routing requests to backend services and resilience handling.
 
-- routing requests to backend services  
-- centralized access point  
-- resilience handling (circuit breaker / fallback)
-
-Technology:
-
+Technology: 
 - Spring Cloud Gateway
 
-Status: **Planned**
-
 ---
 
-## Product Service
-
-Manages the **product catalog**.
+## Product Service(in progress)
 
 Responsibilities:
-
 - create products  
 - list products  
-- manage product information  
 
-Example endpoints:
+Endpoints:
+- POST /api/products
+- GET /api/products
 
-```
-POST /api/product
-GET /api/product
-```
-
-Status: **Planned**
+Technology:
+- MongoDB
 
 ---
 
-## Order Service
-
-Handles **order creation and order workflows**.
+## Order Service(planned)
 
 Responsibilities:
-
-- accept order requests  
-- validate inventory availability  
-- publish order events to Kafka  
+(will be added later)
 
 Example endpoint:
-
-```
-POST /api/order
-```
-
-Status: **Planned**
-
+(will be added later)
 ---
 
-## Inventory Service
-
-Responsible for **inventory management**.
+## Inventory Service(planned)
 
 Responsibilities:
-
-- track product stock  
-- validate product availability for orders  
+(will be added later)
 
 Example endpoint:
-
-```
-GET /api/inventory
-```
-
-Status: **Planned**
+(will be added later)
 
 ---
 
-## Notification Service
-
-Handles **event-based notifications**.
+## Notification Service(planned)
 
 Responsibilities:
-
-- listen to Kafka events  
-- send notifications when an order is placed  
+(will be added later)
 
 Technologies:
-
-- Spring Kafka  
-- JavaMailSender  
-
-Status: **Planned**
+(will be added later)
 
 ---
 
-## Frontend
+## Frontend(planned)
 
-Angular application providing the **user interface** for the system.
+Features:
+(will be added later)
 
-Possible features:
-
-- product listing  
-- product creation  
-- order placement  
-- shared UI components  
-
-Status: **Planned**
-
----
-
-The system is designed to run in a **containerized environment**.
-
-## Docker
-
-Each service will run in its own container.
-
----
-
-## Kubernetes
-
-Kubernetes manifests will be used to deploy:
-
-- microservices  
-- infrastructure components  
-- messaging systems  
-
-Status: **Planned**
+Technologies:
+- Angular
