@@ -70,3 +70,11 @@ Thumbs.db
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+
+# Postman
+.postman/
+postman/environments/
+postman/globals/
+
+# Local data
+data/
