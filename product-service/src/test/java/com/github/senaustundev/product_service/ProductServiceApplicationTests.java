@@ -32,11 +32,13 @@ class ProductServiceApplicationTests {
 
 	@AfterEach
 	void tearDown() {
-		mongoTemplate.getDb().drop();
+		mongoTemplate.getDb().drop(); // deletes all the data in the database after each test so each test has its own
+										// clean database
 	}
 
 	@Test
 	void shouldCreateProduct() {
+		// prepare artificial product to be created
 		String requestBody = """
 				{
 					"name": "wrist band",
@@ -49,10 +51,10 @@ class ProductServiceApplicationTests {
 				.contentType(ContentType.JSON)
 				.body(requestBody)
 				.when()
-				.post("/api/products")
+				.post("/api/products") // call the create method
 				.then()
 				.statusCode(201)
-				.body("id", Matchers.notNullValue())
+				.body("id", Matchers.notNullValue()) // check if the return values match
 				.body("name", Matchers.equalTo("wrist band"))
 				.body("description", Matchers.equalTo("put on wrist."))
 				.body("price", Matchers.equalTo(56.99f));
@@ -60,7 +62,7 @@ class ProductServiceApplicationTests {
 
 	@Test
 	void shouldGetAllProducts() {
-		// Arrange — 2 ürün kaydet
+		// Create 2 artificial products first so you can "getall" them
 		String product1 = """
 				{
 					"name": "wrist band",
@@ -76,18 +78,19 @@ class ProductServiceApplicationTests {
 				}
 				""";
 
+		// use the createProduct method to create products
 		RestAssured.given().contentType(ContentType.JSON).body(product1).post("/api/products");
 		RestAssured.given().contentType(ContentType.JSON).body(product2).post("/api/products");
 
-		// Act & Assert
+		// check if the artificial products are called
 		RestAssured.given()
 				.contentType(ContentType.JSON)
 				.when()
-				.get("/api/products")
+				.get("/api/products") // get all products
 				.then()
 				.statusCode(200)
-				.body("size()", Matchers.equalTo(2))
-				.body("[0].name", Matchers.equalTo("wrist band"))
+				.body("size()", Matchers.equalTo(2)) // check if the size is 2 since you created 2 artificial products
+				.body("[0].name", Matchers.equalTo("wrist band")) // check your products infos
 				.body("[0].price", Matchers.equalTo(56.99f))
 				.body("[1].name", Matchers.equalTo("smart watch"))
 				.body("[1].price", Matchers.equalTo(199.99f));
@@ -95,12 +98,14 @@ class ProductServiceApplicationTests {
 
 	@Test
 	void shouldReturnEmptyListWhenNoProducts() {
+		// dont create any artificial products
+
 		RestAssured.given()
 				.contentType(ContentType.JSON)
 				.when()
-				.get("/api/products")
+				.get("/api/products")// call the getall method
 				.then()
 				.statusCode(200)
-				.body("size()", Matchers.equalTo(0));
+				.body("size()", Matchers.equalTo(0)); // check if the size is 0 since you created 0 artificial products
 	}
 }
