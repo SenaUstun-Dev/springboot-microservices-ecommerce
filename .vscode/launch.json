@@ -9,6 +9,16 @@
             "projectName": "product-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-OrderServiceApplication<order-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.github.senaustundev.order_service.OrderServiceApplication",
+            "projectName": "order-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
