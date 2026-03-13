@@ -1,0 +1,16 @@
+$kind: http-request
+name: place-order
+url: "   http://localhost:8081/api/orders"
+method: POST
+order: 1773440381613
+body:
+  type: json
+  content: "{\r
+
+    \    \"skuCode\": \"apple\",\r
+
+    \    \"quantity\": 1,\r
+
+    \    \"price\": 5000\r
+
+    }"
