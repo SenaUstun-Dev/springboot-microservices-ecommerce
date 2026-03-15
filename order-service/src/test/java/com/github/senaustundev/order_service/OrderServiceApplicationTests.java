@@ -58,5 +58,63 @@ class OrderServiceApplicationTests {
 
 		assertThat(orderRepository.findAll().size(), is(1));
 	}
- 
+
+	@Test
+	void shouldFailToPlaceOrderWithInvalidPriceType() {
+		String requestBody = """
+				{
+					"skuCode": "iphone_15",
+					"price": "not_a_number",
+					"quantity": 1
+				}
+				""";
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/orders")
+				.then()
+				.statusCode(400); // Spring/Jackson will return 400 for type mismatch
+	}
+
+	@Test
+	void shouldFailToPlaceOrderWithZeroQuantity() {
+		// Verifies that the system now REJECTS 0 quantity orders due to @Positive validation
+		String requestBody = """
+				{
+					"skuCode": "iphone_15",
+					"price": 45000,
+					"quantity": 0
+				}
+				""";
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/orders")
+				.then()
+				.statusCode(400);
+	}
+
+	@Test
+	void shouldFailToPlaceOrderWithEmptySku() {
+		// NOTE: This test will FAIL (return 201) until validation annotations are added to OrderRequest.java
+		String requestBody = """
+				{
+					"skuCode": "",
+					"price": 10.00,
+					"quantity": 1
+				}
+				""";
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/orders")
+				.then()
+				.statusCode(400);
+	}
 }

@@ -10,6 +10,7 @@ import com.github.senaustundev.product_service.dto.ProductRequest;
 import com.github.senaustundev.product_service.dto.ProductResponse;
 import com.github.senaustundev.product_service.service.ProductService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,7 +21,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> createProduct(@Valid @RequestBody ProductRequest request) {
         ProductResponse response = productService.createProduct(request);
         URI location = URI.create("/api/products/" + response.id());
         return ResponseEntity.created(location).body(response);

@@ -108,4 +108,85 @@ class ProductServiceApplicationTests {
 				.statusCode(200)
 				.body("size()", Matchers.equalTo(0)); // check if the size is 0 since you created 0 artificial products
 	}
+
+	@Test
+	void shouldFailToCreateProductWithInvalidPriceType() {
+		String requestBody = """
+				{
+					"name": "invalid price product",
+					"description": "price is a string",
+					"price": "not_a_number"
+				}
+				""";
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/products")
+				.then()
+				.statusCode(400); // Spring/Jackson will return 400 for type mismatch
+	}
+
+	@Test
+	void shouldCreateProductWithSpecialCharacters() {
+		String specialName = "Product with <script>alert(1)</script> & <b>HTML</b>";
+		String requestBody = """
+				{
+					"name": "%s",
+					"description": "Testing special characters",
+					"price": 10.00
+				}
+				""".formatted(specialName);
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/products")
+				.then()
+				.statusCode(201)
+				.body("name", Matchers.equalTo(specialName));
+	}
+
+	@Test
+	void shouldCreateProductWithVeryLongDescription() {
+		String longDescription = "A".repeat(1000);
+		String requestBody = """
+				{
+					"name": "Long Desc Product",
+					"description": "%s",
+					"price": 10.00
+				}
+				""".formatted(longDescription);
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/products")
+				.then()
+				.statusCode(201)
+				.body("description", Matchers.equalTo(longDescription));
+	}
+
+	@Test
+	void shouldFailToCreateProductWithEmptyName() {
+		// NOTE: This test will FAIL (return 201) until validation annotations are added to ProductRequest.java
+		String requestBody = """
+				{
+					"name": "",
+					"description": "empty name",
+					"price": 10.00
+				}
+				""";
+
+		RestAssured.given()
+				.contentType(ContentType.JSON)
+				.body(requestBody)
+				.when()
+				.post("/api/products")
+				.then()
+				.statusCode(400);
+	}
 }

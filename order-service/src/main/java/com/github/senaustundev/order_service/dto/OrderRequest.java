@@ -2,6 +2,9 @@ package com.github.senaustundev.order_service.dto;
 
 import java.math.BigDecimal;
 
-public record OrderRequest(String orderNumber, String skuCode, Integer quantity, BigDecimal price) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+public record OrderRequest(String orderNumber, @NotBlank String skuCode, @Positive Integer quantity, @Positive BigDecimal price) {
 
 }
