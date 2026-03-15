@@ -13,15 +13,13 @@ services:
 
   mysql:
     image: mysql:8.4.0
-    container_name: order-service-mysql
+    container_name: mysql-db
     restart: always
     ports:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: mysql
-    #could have created a db but we created the container without this 
-    #line ones so it doesnt work anymore
-    # MYSQL_DATABASE: order-service 
+    # MYSQL_DATABASE: order_service 
     volumes:
       - ./data/mysql:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
