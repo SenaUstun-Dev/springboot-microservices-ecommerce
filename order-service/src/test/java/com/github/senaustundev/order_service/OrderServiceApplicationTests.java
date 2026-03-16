@@ -1,5 +1,5 @@
 package com.github.senaustundev.order_service;
- 
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
@@ -15,29 +15,29 @@ import com.github.senaustundev.order_service.repository.OrderRepository;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
- 
+
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class OrderServiceApplicationTests {
- 
+
 	@LocalServerPort
 	private Integer port;
 
 	@Autowired
 	private OrderRepository orderRepository;
- 
+
 	@BeforeEach
 	void setup() {
 		RestAssured.baseURI = "http://localhost";
 		RestAssured.port = port;
 		RestAssured.proxy = null;
 	}
- 
+
 	@AfterEach
 	void tearDown() {
 		orderRepository.deleteAll();
 	}
- 
+
 	@Test
 	void shouldPlaceOrder() {
 		String requestBody = """
@@ -80,7 +80,8 @@ class OrderServiceApplicationTests {
 
 	@Test
 	void shouldFailToPlaceOrderWithZeroQuantity() {
-		// Verifies that the system now REJECTS 0 quantity orders due to @Positive validation
+		// Verifies that the system now REJECTS 0 quantity orders due to @Positive
+		// validation
 		String requestBody = """
 				{
 					"skuCode": "iphone_15",
@@ -100,7 +101,8 @@ class OrderServiceApplicationTests {
 
 	@Test
 	void shouldFailToPlaceOrderWithEmptySku() {
-		// NOTE: This test will FAIL (return 201) until validation annotations are added to OrderRequest.java
+		// NOTE: This test will FAIL (return 201) until validation annotations are added
+		// to OrderRequest.java
 		String requestBody = """
 				{
 					"skuCode": "",

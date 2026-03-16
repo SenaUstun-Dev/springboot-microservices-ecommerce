@@ -29,6 +29,7 @@ class InventoryServiceApplicationTests {
 		RestAssured.baseURI = "http://localhost";
 		RestAssured.port = port;
 		RestAssured.proxy = null;
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
 	}
 
 	@AfterEach
@@ -90,14 +91,17 @@ class InventoryServiceApplicationTests {
 		org.hamcrest.MatcherAssert.assertThat(response, Matchers.is(false));
 	}
 
-	// @Test
-	// void shouldReturnBadRequestWhenQuantityIsNegative() {
-	// RestAssured.given()
-	// .when()
-	// .get("/api/inventories?skuCode=iphone_15&quantity=-1")
-	// .then()
-	// .log().all()
-	// .statusCode(500);
-	// }
+	// will fix later
+	@Test
+	void shouldReturnBadRequestWhenQuantityIsNegative() {
+		RestAssured.given()
+				.queryParam("skuCode", "iphone_15")
+				.queryParam("quantity", -1) // string değil integer olarak ver
+				.when()
+				.get("/api/inventories")
+				.then()
+				.log().all()
+				.statusCode(400);
+	}
 
 }
