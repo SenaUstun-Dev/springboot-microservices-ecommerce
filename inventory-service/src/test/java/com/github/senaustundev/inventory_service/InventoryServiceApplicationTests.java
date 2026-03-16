@@ -13,6 +13,8 @@ import com.github.senaustundev.inventory_service.modul.Inventory;
 import com.github.senaustundev.inventory_service.repository.InventoryRepository;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -91,17 +93,15 @@ class InventoryServiceApplicationTests {
 		org.hamcrest.MatcherAssert.assertThat(response, Matchers.is(false));
 	}
 
-	// will fix later
 	@Test
 	void shouldReturnBadRequestWhenQuantityIsNegative() {
-		RestAssured.given()
+		Response response = given()
 				.queryParam("skuCode", "iphone_15")
-				.queryParam("quantity", -1) // string değil integer olarak ver
+				.queryParam("quantity", -1)
 				.when()
-				.get("/api/inventories")
-				.then()
-				.log().all()
-				.statusCode(400);
+				.get("/api/inventories");
+
+		response.then().statusCode(400);
 	}
 
 }
