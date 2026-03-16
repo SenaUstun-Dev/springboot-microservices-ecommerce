@@ -13,8 +13,6 @@ import com.github.senaustundev.inventory_service.modul.Inventory;
 import com.github.senaustundev.inventory_service.repository.InventoryRepository;
 
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import static io.restassured.RestAssured.given;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -95,13 +93,13 @@ class InventoryServiceApplicationTests {
 
 	@Test
 	void shouldReturnBadRequestWhenQuantityIsNegative() {
-		Response response = given()
+		RestAssured.expect()
+				.statusCode(400)
+				.given()
 				.queryParam("skuCode", "iphone_15")
 				.queryParam("quantity", -1)
 				.when()
 				.get("/api/inventories");
-
-		response.then().statusCode(400);
 	}
 
 }
