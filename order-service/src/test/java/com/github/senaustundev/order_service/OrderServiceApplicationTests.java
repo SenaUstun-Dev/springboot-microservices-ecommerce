@@ -9,16 +9,21 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.context.annotation.Import;
+import org.wiremock.spring.ConfigureWireMock;
+import org.wiremock.spring.EnableWireMock;
+
 import com.github.senaustundev.order_service.repository.OrderRepository;
+import com.github.senaustundev.order_service.stubs.InventoryClientStub;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWireMock(port = 0)
+@EnableWireMock({
+		@ConfigureWireMock(name = "inventory-service", portProperties = "wiremock.server.port")
+})
 class OrderServiceApplicationTests {
 
 	@LocalServerPort
@@ -26,6 +31,9 @@ class OrderServiceApplicationTests {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@Autowired
+	private InventoryClientStub inventoryClientStub;
 
 	@BeforeEach
 	void setup() {
@@ -48,6 +56,7 @@ class OrderServiceApplicationTests {
 					"quantity": 1
 				}
 				""";
+		inventoryClientStub.stubInventoryCall("iphone_15", 1);
 
 		RestAssured.given()
 				.contentType(ContentType.JSON)
@@ -70,6 +79,8 @@ class OrderServiceApplicationTests {
 				}
 				""";
 
+		// InventoryClientStub.stubInventoryCall("iphone_15", "not_a_number");
+
 		RestAssured.given()
 				.contentType(ContentType.JSON)
 				.body(requestBody)
@@ -91,6 +102,8 @@ class OrderServiceApplicationTests {
 				}
 				""";
 
+		InventoryClientStub.stubInventoryCall("iphone_15", 0);
+
 		RestAssured.given()
 				.contentType(ContentType.JSON)
 				.body(requestBody)
@@ -111,6 +124,8 @@ class OrderServiceApplicationTests {
 					"quantity": 1
 				}
 				""";
+
+		InventoryClientStub.stubInventoryCall("", 1);
 
 		RestAssured.given()
 				.contentType(ContentType.JSON)
