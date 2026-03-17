@@ -53,7 +53,7 @@ class OrderServiceApplicationTests {
 					"quantity": 1
 				}
 				""";
-		// InventoryClientStub.stubInventoryCall("iphone_15", 1);
+		InventoryClientStub.stubInventoryCall("iphone_15", 1);
 
 		RestAssured.given()
 				.contentType(ContentType.JSON)
