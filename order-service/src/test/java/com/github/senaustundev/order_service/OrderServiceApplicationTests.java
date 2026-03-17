@@ -22,7 +22,7 @@ import io.restassured.http.ContentType;
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableWireMock({
-		@ConfigureWireMock(name = "inventory-service", portProperties = "wiremock.server.port")
+		@ConfigureWireMock(name = "inventory", portProperties = "wiremock.server.port")
 })
 class OrderServiceApplicationTests {
 
@@ -31,9 +31,6 @@ class OrderServiceApplicationTests {
 
 	@Autowired
 	private OrderRepository orderRepository;
-
-	@Autowired
-	private InventoryClientStub inventoryClientStub;
 
 	@BeforeEach
 	void setup() {
@@ -56,7 +53,7 @@ class OrderServiceApplicationTests {
 					"quantity": 1
 				}
 				""";
-		inventoryClientStub.stubInventoryCall("iphone_15", 1);
+		// InventoryClientStub.stubInventoryCall("iphone_15", 1);
 
 		RestAssured.given()
 				.contentType(ContentType.JSON)
