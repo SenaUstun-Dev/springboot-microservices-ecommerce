@@ -43,6 +43,7 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 - **Spring Boot** (Spring Web, Spring Data JPA, Lombok)
 - **Spring Cloud Gateway** (API Gateway)
 - **Resilience4j**
+- **Spring Cloud OpenFeign**
 
 ### Databases
 - **MongoDB**
@@ -92,10 +93,10 @@ This project demonstrates several distributed system patterns:
 ```
 springboot-microservices-ecommerce
 │
-├── api-gateway (planned)
-├── product-service (currently in progress)
-├── order-service (planned)
-├── inventory-service (planned)
+├── api-gateway (currently in progress)
+├── product-service (done)
+├── order-service (done)
+├── inventory-service (done)
 ├── notification-service (planned)
 │
 ├── frontend (planned)
@@ -126,7 +127,7 @@ Technology:
 
 ---
 
-## Product Service(in progress)
+## Product Service
 
 Responsibilities:
 - create products  
@@ -144,19 +145,25 @@ Technology:
 ## Order Service(planned)
 
 Responsibilities:
-(will be added later)
+- create orders
 
-Example endpoint:
-(will be added later)
+Endpoints:
+- POST /api/orders
+
+Technology:
+- MySQL
 ---
 
 ## Inventory Service(planned)
 
 Responsibilities:
-(will be added later)
+- Checks if the product is in stock
 
-Example endpoint:
-(will be added later)
+Endpoints:
+- GET /api/inventories
+
+Technology:
+- MySQL
 
 ---
 
