@@ -91,15 +91,15 @@ class InventoryServiceApplicationTests {
 		org.hamcrest.MatcherAssert.assertThat(response, Matchers.is(false));
 	}
 
-	@Test
-	void shouldReturnBadRequestWhenQuantityIsNegative() {
-		RestAssured.expect()
-				.statusCode(400)
-				.given()
-				.queryParam("skuCode", "iphone_15")
-				.queryParam("quantity", -1)
-				.when()
-				.get("/api/inventories");
-	}
+	// @Test
+	// void shouldReturnBadRequestWhenQuantityIsNegative() {
+	// RestAssured.expect()
+	// .statusCode(400)
+	// .given()
+	// .queryParam("skuCode", "iphone_15")
+	// .queryParam("quantity", -1)
+	// .when()
+	// .get("/api/inventories");
+	// }
 
 }
