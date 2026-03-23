@@ -39,9 +39,10 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 # 🛠 Tech Stack
 
 ### Backend
-- **Java**
+- **Java 21**
 - **Spring Boot** (Spring Web, Spring Data JPA, Lombok)
-- **Spring Cloud Gateway** (API Gateway)
+- **Spring Cloud Gateway MVC** (API Gateway)
+- **Spring Cloud Eureka** (Service Discovery)
 - **Resilience4j**
 
 ### Databases
@@ -92,15 +93,16 @@ This project demonstrates several distributed system patterns:
 ```
 springboot-microservices-ecommerce
 │
-├── api-gateway (planned)
+├── api-gateway (currently in progress)
 ├── product-service (currently in progress)
-├── order-service (planned)
-├── inventory-service (planned)
+├── order-service
+├── inventory-service
 ├── notification-service (planned)
 │
 ├── frontend (planned)
 │
-├── docker (planned)
+├── eureka-server
+├── docker (currently in progress)
 └── kubernetes (planned)
 ```
 
@@ -116,47 +118,63 @@ Some modules may **not yet exist in the repository** and will be **added as deve
 
 # 🔧 Services
 
-## API Gateway(planned)
+## API Gateway
 
 Responsibilities:
 - routing requests to backend services and resilience handling.
 
 Technology: 
-- Spring Cloud Gateway
+- Spring Cloud Gateway MVC
+- Keycloak
 
 ---
+## Eureka Server
 
-## Product Service(in progress)
+Responsibilities:
+- service discovery, finds location of services
+
+Technology:
+- Spring Cloud Eureka
+
+---
+## Product Service
 
 Responsibilities:
 - create products  
 - list products  
 
 Endpoints:
-- POST /api/products
-- GET /api/products
+- POST /api/products createProduct
+- GET /api/products getAllProducts
 
 Technology:
 - MongoDB
+- Docker
 
 ---
 
-## Order Service(planned)
+## Order Service
 
 Responsibilities:
-(will be added later)
+- create orders
 
-Example endpoint:
-(will be added later)
+Endpoint:
+- POST /api/orders placeOrder
+
+Technology:
+- MySQL
+- Docker
+- Feign Client (for GET /api/inventories)
+
 ---
 
-## Inventory Service(planned)
+## Inventory Service
 
 Responsibilities:
-(will be added later)
+- check if products are in stock
 
 Example endpoint:
-(will be added later)
+- GET /api/inventories isInStock
 
 ---
 
