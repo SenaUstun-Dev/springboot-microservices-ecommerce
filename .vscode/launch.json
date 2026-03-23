@@ -38,6 +38,17 @@
             "mainClass": "com.github.senaustundev.api_gateway.ApiGatewayApplication",
             "projectName": "api-gateway",
             "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EurekaServerApplication<eureka-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.github.senaustundev.eureka_server.EurekaServerApplication",
+            "projectName": "eureka-server",
+            "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
     ]
