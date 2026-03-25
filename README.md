@@ -43,7 +43,9 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 - **Spring Boot** (Spring Web, Spring Data JPA, Lombok)
 - **Spring Cloud Gateway MVC** (API Gateway)
 - **Spring Cloud Eureka** (Service Discovery)
+- **Feign Client**
 - **Resilience4j**
+- **Flyway**
 
 ### Databases
 - **MongoDB**
@@ -126,6 +128,7 @@ Responsibilities:
 Technology: 
 - Spring Cloud Gateway MVC
 - Keycloak
+- Docker
 
 ---
 ## Eureka Server
@@ -165,6 +168,7 @@ Technology:
 - MySQL
 - Docker
 - Feign Client (for GET /api/inventories)
+- Flyway
 
 ---
 
@@ -173,8 +177,13 @@ Technology:
 Responsibilities:
 - check if products are in stock
 
-Example endpoint:
+Endpoint:
 - GET /api/inventories isInStock
+
+Technology:
+- MySQL
+- Docker
+- Flyway
 
 ---
 
