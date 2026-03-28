@@ -92,3 +92,6 @@ postman/globals/
 # Local data
 data/
 volume-data/
+
+# Temporary logs
+*.txt

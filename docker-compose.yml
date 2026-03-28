@@ -1,7 +1,9 @@
 services:
   mongodb:
-    image: mongo:7.0
+    image: mongo:8.0
     container_name: mongodb
+    restart: unless-stopped
+    stop_grace_period: 30s
     ports:
       - "27017:27017"
     environment:
@@ -10,6 +12,11 @@ services:
       - MONGO_INITDB_DATABASE=product-service
     volumes:
       - ./data/mongodb:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   mysql:
     image: mysql:8.4.0
