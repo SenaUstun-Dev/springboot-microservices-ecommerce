@@ -1,37 +1,22 @@
 package com.github.senaustundev.api_gateway.routes;
 
-import java.net.URI;
-
-import com.github.senaustundev.api_gateway.config.ServiceUrlProperties;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.function.RequestPredicates;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
-import static org.springframework.cloud.gateway.server.mvc.filter.BeforeFilterFunctions.uri;
+import static org.springframework.cloud.gateway.server.mvc.filter.LoadBalancerFilterFunctions.lb;
 import static org.springframework.cloud.gateway.server.mvc.handler.GatewayRouterFunctions.route;
 import static org.springframework.cloud.gateway.server.mvc.handler.HandlerFunctions.http;
 
 @Configuration
-@RequiredArgsConstructor
 public class Routes {
-
-        // we dont hardcode the urls in the routes, we use the serviceUrlProperties
-        // this is done to make the code more maintainable and testable
-        // if we need to change the url of a service, we only need to change it in the
-        // application.properties file
-        // and the routes will automatically update
-        // also this allows us to use different urls for different environments
-        // e.g. localhost for development, docker for testing, and a real url for
-        // production
-        private final ServiceUrlProperties serviceUrlProperties;
 
         @Bean
         public RouterFunction<ServerResponse> productServiceRoutes() {
                 return route("product-service")
                                 .route(RequestPredicates.path("/api/products/**"), http())
-                                .before(uri(URI.create(serviceUrlProperties.getProduct().getUrl())))
+                                .filter(lb("product-service"))
                                 .build();
         }
 
@@ -39,7 +24,7 @@ public class Routes {
         public RouterFunction<ServerResponse> orderServiceRoutes() {
                 return route("order-service")
                                 .route(RequestPredicates.path("/api/orders/**"), http())
-                                .before(uri(URI.create(serviceUrlProperties.getOrder().getUrl())))
+                                .filter(lb("order-service"))
                                 .build();
         }
 
@@ -47,7 +32,7 @@ public class Routes {
         public RouterFunction<ServerResponse> inventoryServiceRoutes() {
                 return route("inventory-service")
                                 .route(RequestPredicates.path("/api/inventories/**"), http())
-                                .before(uri(URI.create(serviceUrlProperties.getInventory().getUrl())))
+                                .filter(lb("inventory-service"))
                                 .build();
         }
 }

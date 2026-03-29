@@ -15,4 +15,14 @@ auth:
 order: 1773265604548
 body:
   type: json
-  content: ""
+  content: "    {\r
+
+    \        \"id\": \"69c9557c9aa88c6fdcfbb1d4\",\r
+
+    \        \"name\": \"fiyhuhuuu\",\r
+
+    \        \"description\": \"yey frierin.\",\r
+
+    \        \"price\": 1000.99\r
+
+    \    }"

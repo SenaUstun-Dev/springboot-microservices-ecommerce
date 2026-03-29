@@ -7,10 +7,10 @@ body:
   type: json
   content: "{\r
 
-    \    \"skuCode\": \"apple\",\r
+    \t\"skuCode\": \"iphone_15\",\r
 
-    \    \"quantity\": 2,\r
+    \t\"price\": 45000,\r
 
-    \    \"price\": 5000\r
+    \t\"quantity\": 1\r
 
     }"

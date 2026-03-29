@@ -9,16 +9,21 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.wiremock.spring.ConfigureWireMock;
 import org.wiremock.spring.EnableWireMock;
 
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
-		"services.product.url=http://localhost:${wiremock.port}",
-		"services.order.url=http://localhost:${wiremock.port}",
-		"services.inventory.url=http://localhost:${wiremock.port}"
+		"spring.security.oauth2.resourceserver.jwt.issuer-uri=http://localhost:${wiremock.port}",
+		"spring.cloud.discovery.client.simple.instances.product-service[0].uri=http://localhost:${wiremock.port}",
+		"spring.cloud.discovery.client.simple.instances.order-service[0].uri=http://localhost:${wiremock.port}",
+		"spring.cloud.discovery.client.simple.instances.inventory-service[0].uri=http://localhost:${wiremock.port}"
 })
 @EnableWireMock({
 		@ConfigureWireMock(name = "services", portProperties = "wiremock.port")
 })
+@Import(TestSecurityConfig.class)
+@ActiveProfiles("test")
 class ApiGatewayApplicationTests {
 
 	@LocalServerPort

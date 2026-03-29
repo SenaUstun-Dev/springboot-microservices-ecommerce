@@ -1,16 +1,18 @@
 $kind: http-request
 name: place-order
-url: "   http://localhost:8081/api/orders"
+url: "   http://localhost:9000/api/orders"
 method: POST
+auth:
+  type: oauth2
 order: 1773440381613
 body:
   type: json
   content: "{\r
 
-    \    \"skuCode\": \"apple\",\r
+    \t\"skuCode\": \"iphone_15\",\r
 
-    \    \"quantity\": 1,\r
+    \t\"price\": 45000,\r
 
-    \    \"price\": 5000\r
+    \t\"quantity\": 1\r
 
     }"
