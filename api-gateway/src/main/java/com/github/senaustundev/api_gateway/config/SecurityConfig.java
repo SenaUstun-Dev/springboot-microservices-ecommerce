@@ -21,63 +21,53 @@ import java.util.List;
 @Profile("!test")
 public class SecurityConfig {
 
-    // @Bean
-    // public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
-    // throws Exception {
-    // return httpSecurity
-    // .authorizeHttpRequests(authorize -> authorize
-    // .anyRequest().authenticated())
-    // .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
-    // .build();
-    // }
+        private final String[] freeResourceUrls = {
+                        // "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**",
+                        // "/swagger-resources/**", "/api-docs/**", "/aggregate/**",
+                        // "/actuator/prometheus"
+        };
 
-    // they be added later
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
+                        throws Exception {
+                return httpSecurity
+                                .authorizeHttpRequests(authorize -> authorize
+                                                .requestMatchers(freeResourceUrls).permitAll()
+                                                .anyRequest().authenticated())
+                                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                                .oauth2ResourceServer(oauth2 -> oauth2
+                                                .jwt(jwt -> jwt.jwtAuthenticationConverter(
+                                                                jwtAuthenticationConverter())))
+                                // Gateway is stateless — no session needed
+                                .sessionManagement(session -> session
+                                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                // Disable CSRF for stateless REST APIs
+                                .csrf(AbstractHttpConfigurer::disable)
+                                .build();
+        }
 
-    private final String[] freeResourceUrls = {
-            // "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**",
-            // "/swagger-resources/**", "/api-docs/**", "/aggregate/**",
-            // "/actuator/prometheus"
-    };
+        // This is the key modernization: extract roles from Keycloak's token structure
+        @Bean
+        public JwtAuthenticationConverter jwtAuthenticationConverter() {
+                JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
-            throws Exception {
-        return httpSecurity
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(freeResourceUrls).permitAll()
-                        .anyRequest().authenticated())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
-                // Gateway is stateless — no session needed
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // Disable CSRF for stateless REST APIs
-                .csrf(AbstractHttpConfigurer::disable)
-                .build();
-    }
+                // Keycloak puts roles at realm_access.roles, not in "scope"
+                converter.setAuthoritiesClaimName("realm_access.roles");
+                converter.setAuthorityPrefix("ROLE_");
 
-    // This is the key modernization: extract roles from Keycloak's token structure
-    @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
+                JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
+                jwtConverter.setJwtGrantedAuthoritiesConverter(converter);
+                return jwtConverter;
+        }
 
-        // Keycloak puts roles at realm_access.roles, not in "scope"
-        converter.setAuthoritiesClaimName("realm_access.roles");
-        converter.setAuthorityPrefix("ROLE_");
-
-        JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
-        jwtConverter.setJwtGrantedAuthoritiesConverter(converter);
-        return jwtConverter;
-    }
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.applyPermitDefaultValues();
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE",
-                "OPTIONS", "HEAD"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+        @Bean
+        CorsConfigurationSource corsConfigurationSource() {
+                CorsConfiguration configuration = new CorsConfiguration();
+                configuration.applyPermitDefaultValues();
+                configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE",
+                                "OPTIONS", "HEAD"));
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+                source.registerCorsConfiguration("/**", configuration);
+                return source;
+        }
 }
