@@ -8,6 +8,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+HELP.md
 # Avoid ignoring the wrapper jar if you use the wrapper
 #!.mvn/wrapper/maven-wrapper.jar
 
