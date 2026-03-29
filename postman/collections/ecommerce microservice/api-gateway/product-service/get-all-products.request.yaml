@@ -1,0 +1,13 @@
+$kind: http-request
+url: http://localhost:9000/api/products
+method: GET
+auth:
+  type: oauth2
+  credentials:
+    grant_type: client_credentials
+    tokenName: Tokenn
+    accessTokenUrl: http://localhost:8181/realms/springboot-microservices-ecommerce-security-realm/protocol/openid-connect/token
+    clientSecret: ldUxvcF8vrQOfy4L4jyQQmbIG2kvNjOZ
+    clientId: spring-client-credentials-id
+examples: .resources/get-all-products.resources/examples
+order: 473881278966283

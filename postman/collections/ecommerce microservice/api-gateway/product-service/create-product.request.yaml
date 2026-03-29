@@ -1,0 +1,18 @@
+$kind: http-request
+name: create-product
+url: "   http://localhost:9000/api/products"
+method: POST
+auth:
+  type: oauth2
+  credentials:
+    grant_type: client_credentials
+    accessTokenUrl: http://localhost:8181/realms/springboot-microservices-ecommerce-security-realm/protocol/openid-connect/token
+    clientId: spring-client-credentials-id
+    clientSecret: C1wlqtSC4GgGYoQko6hrpl2ufH3H0b40
+    tokenName: keycloak-token
+    scope: openid roles
+    addTokenTo: header
+order: 1773265604548
+body:
+  type: json
+  content: ""

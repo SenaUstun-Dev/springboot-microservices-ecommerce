@@ -50,6 +50,7 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 ### Databases
 - **MongoDB**
 - **MySQL**
+- **PostgreSQL**
 
 ### Messaging
 - **Apache Kafka**
@@ -127,7 +128,7 @@ Responsibilities:
 
 Technology: 
 - Spring Cloud Gateway MVC
-- Keycloak
+- Keycloak (OAuth2, uses PostgreSQL)
 - Docker
 
 ---

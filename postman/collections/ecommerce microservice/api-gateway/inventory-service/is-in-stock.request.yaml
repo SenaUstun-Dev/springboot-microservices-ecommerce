@@ -1,0 +1,5 @@
+$kind: http-request
+name: is-in-stock
+url: ""
+method: GET
+order: 1773617128264
