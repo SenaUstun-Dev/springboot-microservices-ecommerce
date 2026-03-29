@@ -1,4 +1,6 @@
-package com.github.senaustundev.inventory_service.modul;
+package com.github.senaustundev.order_service.model;
+
+import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,16 +12,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name = "inventory")
+@Table(name = "orders")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Inventory {
+@AllArgsConstructor
+@Entity
+public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String orderNumber;
     private String skuCode;
+    private BigDecimal price;
     private Integer quantity;
 }

@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 
-import com.github.senaustundev.inventory_service.modul.Inventory;
+import com.github.senaustundev.inventory_service.model.Inventory;
 import com.github.senaustundev.inventory_service.repository.InventoryRepository;
 
 import io.restassured.RestAssured;

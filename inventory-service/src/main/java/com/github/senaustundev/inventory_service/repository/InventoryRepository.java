@@ -2,7 +2,7 @@ package com.github.senaustundev.inventory_service.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.github.senaustundev.inventory_service.modul.Inventory;
+import com.github.senaustundev.inventory_service.model.Inventory;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
 

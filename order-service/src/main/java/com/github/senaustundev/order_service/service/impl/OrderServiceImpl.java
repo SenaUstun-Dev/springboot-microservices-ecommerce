@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.senaustundev.order_service.client.InventoryClient;
 import com.github.senaustundev.order_service.dto.OrderRequest;
-import com.github.senaustundev.order_service.modul.Order;
+import com.github.senaustundev.order_service.model.Order;
 import com.github.senaustundev.order_service.repository.OrderRepository;
 import com.github.senaustundev.order_service.service.OrderService;
 
