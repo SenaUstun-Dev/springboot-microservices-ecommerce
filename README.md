@@ -43,6 +43,7 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 - **Spring Boot** (Spring Web, Spring Data JPA, Lombok)
 - **Spring Cloud Gateway MVC** (API Gateway)
 - **Spring Cloud Eureka** (Service Discovery)
+- **Swagger (OpenAPI) v3**
 - **Feign Client**
 - **Resilience4j**
 - **Flyway**
@@ -151,7 +152,7 @@ Endpoints:
 - POST /api/products createProduct
 - GET /api/products getAllProducts
 
-Technology:
+Technology: 
 - MongoDB
 - Docker
 
@@ -165,7 +166,7 @@ Responsibilities:
 Endpoint:
 - POST /api/orders placeOrder
 
-Technology:
+Technology: 
 - MySQL
 - Docker
 - Feign Client (for GET /api/inventories)
@@ -181,7 +182,7 @@ Responsibilities:
 Endpoint:
 - GET /api/inventories isInStock
 
-Technology:
+Technology: 
 - MySQL
 - Docker
 - Flyway
