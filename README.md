@@ -35,7 +35,7 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 ### Backend
 - **Java 21**
-- **Spring Boot 3** <sub>*(Spring Web, Spring Data JPA, Lombok)*</sub>
+- **Spring Boot 4** <sub>*(Spring Web, Spring Data JPA, Lombok)*</sub>
 - **Spring Cloud Gateway MVC** <sub>*(API Gateway)*</sub>
 - **Spring Cloud Eureka** <sub>*(Service Discovery)*</sub>
 - **Spring HTTP Interface** <sub>*(REST Client)*</sub> <sub>*(refactored from Feign Client)*</sub>
@@ -66,7 +66,7 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 ### Security
 - **OAuth2**
-- **Keycloak**
+- **Keycloak** (uses PostgreSQL)
 
 ### Testing
 - **JUnit**
@@ -135,7 +135,7 @@ Responsibilities:
 
 Technology: 
 - Spring Cloud Gateway MVC
-- Keycloak (OAuth2, uses PostgreSQL)
+- Keycloak
 - Docker
 - Swagger
 
