@@ -1,7 +1,7 @@
 # springboot-microservices-ecommerce
 # 🚧 Work in Progress
 
-This project is currently **under active development**.  
+This project is currently **under active development**. Not everything down there is implemented yet.  
 
 ---
 
@@ -20,19 +20,10 @@ Below this readme has:
 This repository contains a **ecommerce microservices architecture practice project** build with Spring boot and Angular. It contains of 6 microservices: product-service, order-service, inventory-service, notification-service, api-gateway, frontend. 
 
 ### Goal
-The main purpose of this project is to **gain hands-on experience with microservices architecture** and everthing in the Tech Stack section.
-
-Key goals of this project include:
-
-- designing **independent microservices**
-- implementing **service-to-service communication**
-- building an **API Gateway**
-- applying **resilience patterns**
-- practicing **event-driven architecture**
-- learning **containerized deployments**
-- having **hands-on experience with everything in tech stack**
 
 This project is intended for **learning, experimentation, and portfolio demonstration**.
+
+The main purpose of this project is to gain hands-on experience with everything in the **"Tech Stack"** and **"Architecture Concepts"** sections.
 
 ---
 
@@ -40,13 +31,13 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 
 ### Backend
 - **Java 21**
-- **Spring Boot** (Spring Web, Spring Data JPA, Lombok)
+- **Spring Boot 3**            (Spring Web, Spring Data JPA, Lombok)
 - **Spring Cloud Gateway MVC** (API Gateway)
-- **Spring Cloud Eureka** (Service Discovery)
-- **Swagger (OpenAPI) v3**
-- **Feign Client**
-- **Resilience4j**
-- **Flyway**
+- **Spring Cloud Eureka**      (Service Discovery)
+- **Spring Cloud OpenFeign**   (REST Client)
+- **Resilience4j**             (Circuit Breaker & Retries)
+- **Flyway**                   (Database Migrations)
+- **Swagger (OpenAPI) v3**     (API Documentation)
 
 ### Databases
 - **MongoDB**
@@ -54,16 +45,16 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 - **PostgreSQL**
 
 ### Messaging
-- **Apache Kafka**
+- **Apache Kafka** (Event-Driven Messaging)
 
 ### Frontend
 - **Angular**
 
-### Observability
-- **Prometheus**
-- **Grafana**
-- **Loki**
-- **Tempo**
+### Observability (Grafana Stack)
+- **Prometheus**   (Metrics)
+- **Grafana**      (Dashboards)
+- **Loki**         (Log Aggregation)
+- **Tempo**        (Distributed Tracing)
 
 ### Infrastructure
 - **Docker**
@@ -82,13 +73,20 @@ This project is intended for **learning, experimentation, and portfolio demonstr
 
 # 🧠 Architecture Concepts
 
-This project demonstrates several distributed system patterns:
+This project demonstrates several distributed system patterns and modern engineering practices:
 
-- **Microservices Architecture**
-- **API Gateway Pattern**
-- **Event-Driven Architecture**
-- **Circuit Breaker Pattern**
-- **Service Isolation**
+- **Microservices Architecture**---------(Decoupled, specialized services)
+- **Service Discovery**------------------(Dynamic service registration and lookup)
+- **API Gateway Pattern**----------------(Edge routing, filtering, and centralized security)
+- **Inter-Service Communication**--------(Synchronous via Feign, Asynchronous via Kafka)
+- **Centralized Security**---------------(Identity & Access Management using Keycloak)
+- **Event-Driven Architecture**----------(Decoupling services using message brokers)
+- **Resilience Patterns**----------------(Circuit Breaker, Retries to handle partial failures)
+- **Observability**----------------------(Centralized logging, distributed tracing, and metrics)
+- **Database per Service**---------------(Ensuring data isolation and autonomy)
+- **Centralized API Documentation**------(Aggregated OpenAPI documentation for all services)
+- **Containerization & Orchestration**---(Packaged deployments with Docker and K8s)
+- **Integration Testing**----------------(Automated tests using real containers and downstream mocks)
 
 ---
 
@@ -97,8 +95,8 @@ This project demonstrates several distributed system patterns:
 ```
 springboot-microservices-ecommerce
 │
-├── api-gateway (currently in progress)
-├── product-service (currently in progress)
+├── api-gateway
+├── product-service
 ├── order-service
 ├── inventory-service
 ├── notification-service (planned)
@@ -106,7 +104,7 @@ springboot-microservices-ecommerce
 ├── frontend (planned)
 │
 ├── eureka-server
-├── docker (currently in progress)
+├── docker
 └── kubernetes (planned)
 ```
 
@@ -125,7 +123,9 @@ Some modules may **not yet exist in the repository** and will be **added as deve
 ## API Gateway
 
 Responsibilities:
-- routing requests to backend services and resilience handling.
+- routing requests to backend services 
+- centralized security
+- centralized api documentation
 
 Technology: 
 - Spring Cloud Gateway MVC
