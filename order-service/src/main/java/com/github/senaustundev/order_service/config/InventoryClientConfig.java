@@ -4,6 +4,7 @@ import com.github.senaustundev.order_service.client.InventoryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
@@ -14,6 +15,12 @@ public class InventoryClientConfig {
     @Bean
     @LoadBalanced
     RestClient.Builder loadBalancedRestClientBuilder() {
+        return RestClient.builder();
+    }
+
+    @Bean
+    @Primary
+    RestClient.Builder defaultRestClientBuilder() {
         return RestClient.builder();
     }
 
