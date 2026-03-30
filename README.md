@@ -75,20 +75,18 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 This project demonstrates several distributed system patterns and modern engineering practices:
 
-| Concept | Description |
-| :--- | :--- |
-| **Microservices Architecture** | Decoupled, specialized services serving specific business domains |
-| **Service Discovery** | Dynamic service registration and lookup via Eureka Server |
-| **API Gateway Pattern** | Unified entry point for edge routing, security, and documentation |
-| **Inter-Service Communication** | Synchronous (Feign) and Asynchronous (Kafka) patterns |
-| **Centralized Security** | IAM integration using Keycloak and OAuth2/OIDC |
-| **Event-Driven Architecture** | Decoupled processing using message brokers (Kafka) |
-| **Resilience Patterns** | Circuit Breakers and Retries (Resilience4j) for fault tolerance |
-| **Observability** | Centralized logs (Loki), traces (Tempo), and metrics (Prometheus) |
-| **Database per Service** | Data isolation and autonomy for independent scaling |
-| **Centralized API Docs** | Aggregated Swagger/OpenAPI documentation at the gateway level |
-| **Containerization** | Packaging and orchestration using Docker and Kubernetes |
-| **Integration Testing** | Robust testing using WireMock and Testcontainers |
+- **Microservices Architecture** <sub>*(Decoupled, specialized services serving specific business domains)*</sub>
+- **Service Discovery** <sub>*(Dynamic service registration and lookup via Eureka Server)*</sub>
+- **API Gateway Pattern** <sub>*(Unified entry point for edge routing, security, and documentation)*</sub>
+- **Inter-Service Communication** <sub>*(Synchronous via Feign and Asynchronous via Kafka)*</sub>
+- **Centralized Security** <sub>*(IAM integration using Keycloak and OAuth2/OIDC)*</sub>
+- **Event-Driven Architecture** <sub>*(Decoupled processing using message brokers like Kafka)*</sub>
+- **Resilience Patterns** <sub>*(Circuit Breakers and Retries using Resilience4j)*</sub>
+- **Observability** <sub>*(Centralized logs, distributed tracing, and metrics)*</sub>
+- **Database per Service** <sub>*(Ensuring data isolation and autonomy for each service)*</sub>
+- **Centralized API Docs** <sub>*(Aggregated OpenAPI documentation at the gateway level)*</sub>
+- **Containerization** <sub>*(Packaging and orchestration using Docker and Kubernetes)*</sub>
+- **Integration Testing** <sub>*(Robust testing using WireMock and Testcontainers)*</sub>
 
 ---
 
