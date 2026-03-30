@@ -131,6 +131,7 @@ Technology:
 - Spring Cloud Gateway MVC
 - Keycloak (OAuth2, uses PostgreSQL)
 - Docker
+- Swagger
 
 ---
 ## Eureka Server
@@ -155,6 +156,7 @@ Endpoints:
 Technology: 
 - MongoDB
 - Docker
+- Swagger
 
 ---
 
@@ -171,6 +173,7 @@ Technology:
 - Docker
 - Feign Client (for GET /api/inventories)
 - Flyway
+- Swagger
 
 ---
 
@@ -186,6 +189,7 @@ Technology:
 - MySQL
 - Docker
 - Flyway
+- Swagger
 
 ---
 
