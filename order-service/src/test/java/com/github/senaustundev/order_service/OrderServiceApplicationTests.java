@@ -20,7 +20,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
+		"spring.cloud.discovery.client.simple.instances.inventory-service[0].uri=http://localhost:${wiremock.server.port}"
+})
 @EnableWireMock({
 		@ConfigureWireMock(name = "inventory", portProperties = "wiremock.server.port")
 })

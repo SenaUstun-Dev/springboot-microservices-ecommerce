@@ -5,7 +5,11 @@ This project is currently **under active development**. Not everything down ther
 
 ---
 
-# 🧩 Spring Boot Microservices Architecture Practice
+# 🧩 Spring Boot Microservices Architecture Practice 
+# <sub>*VERSION [refactor / feign -> http interface]*</sub>
+
+> [!NOTE] <sub>*about [feign -> http interface] refactoring*</sub>
+> This refactoring will not change the business logic of the order-service, only the mechanism used to communicate with the inventory-service.
 
 Below this readme has:
 - **Overview** (short explanation of the project)
@@ -34,7 +38,7 @@ The main purpose of this project is to gain hands-on experience with everything 
 - **Spring Boot 3** <sub>*(Spring Web, Spring Data JPA, Lombok)*</sub>
 - **Spring Cloud Gateway MVC** <sub>*(API Gateway)*</sub>
 - **Spring Cloud Eureka** <sub>*(Service Discovery)*</sub>
-- **Spring Cloud OpenFeign** <sub>*(REST Client)*</sub>
+- **Spring HTTP Interface** <sub>*(REST Client)*</sub> <sub>*(refactored from Feign Client)*</sub>
 - **Resilience4j** <sub>*(Circuit Breaker & Retries)*</sub>
 - **Flyway** <sub>*(Database Migrations)*</sub>
 - **Swagger (OpenAPI) v3** <sub>*(API Documentation)*</sub>
@@ -173,7 +177,7 @@ Endpoint:
 Technology: 
 - MySQL
 - Docker
-- Feign Client (for GET /api/inventories)
+- Spring HTTP Interface (for GET /api/inventories) <sub>*(refactored from Feign Client)*</sub>
 - Flyway
 - Swagger
 
