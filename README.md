@@ -31,13 +31,13 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 ### Backend
 - **Java 21**
-- **Spring Boot 3**            (Spring Web, Spring Data JPA, Lombok)
-- **Spring Cloud Gateway MVC** (API Gateway)
-- **Spring Cloud Eureka**      (Service Discovery)
-- **Spring Cloud OpenFeign**   (REST Client)
-- **Resilience4j**             (Circuit Breaker & Retries)
-- **Flyway**                   (Database Migrations)
-- **Swagger (OpenAPI) v3**     (API Documentation)
+- **Spring Boot 3** <sub>*(Spring Web, Spring Data JPA, Lombok)*</sub>
+- **Spring Cloud Gateway MVC** <sub>*(API Gateway)*</sub>
+- **Spring Cloud Eureka** <sub>*(Service Discovery)*</sub>
+- **Spring Cloud OpenFeign** <sub>*(REST Client)*</sub>
+- **Resilience4j** <sub>*(Circuit Breaker & Retries)*</sub>
+- **Flyway** <sub>*(Database Migrations)*</sub>
+- **Swagger (OpenAPI) v3** <sub>*(API Documentation)*</sub>
 
 ### Databases
 - **MongoDB**
@@ -45,16 +45,16 @@ The main purpose of this project is to gain hands-on experience with everything 
 - **PostgreSQL**
 
 ### Messaging
-- **Apache Kafka** (Event-Driven Messaging)
+- **Apache Kafka** <sub>*(Event-Driven Messaging)*</sub>
 
 ### Frontend
 - **Angular**
 
 ### Observability (Grafana Stack)
-- **Prometheus**   (Metrics)
-- **Grafana**      (Dashboards)
-- **Loki**         (Log Aggregation)
-- **Tempo**        (Distributed Tracing)
+- **Prometheus** <sub>*(Metrics)*</sub>
+- **Grafana** <sub>*(Dashboards)*</sub>
+- **Loki** <sub>*(Log Aggregation)*</sub>
+- **Tempo** <sub>*(Distributed Tracing)*</sub>
 
 ### Infrastructure
 - **Docker**
@@ -75,18 +75,20 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 This project demonstrates several distributed system patterns and modern engineering practices:
 
-- **Microservices Architecture**---------(Decoupled, specialized services)
-- **Service Discovery**------------------(Dynamic service registration and lookup)
-- **API Gateway Pattern**----------------(Edge routing, filtering, and centralized security)
-- **Inter-Service Communication**--------(Synchronous via Feign, Asynchronous via Kafka)
-- **Centralized Security**---------------(Identity & Access Management using Keycloak)
-- **Event-Driven Architecture**----------(Decoupling services using message brokers)
-- **Resilience Patterns**----------------(Circuit Breaker, Retries to handle partial failures)
-- **Observability**----------------------(Centralized logging, distributed tracing, and metrics)
-- **Database per Service**---------------(Ensuring data isolation and autonomy)
-- **Centralized API Documentation**------(Aggregated OpenAPI documentation for all services)
-- **Containerization & Orchestration**---(Packaged deployments with Docker and K8s)
-- **Integration Testing**----------------(Automated tests using real containers and downstream mocks)
+| Concept | Description |
+| :--- | :--- |
+| **Microservices Architecture** | Decoupled, specialized services serving specific business domains |
+| **Service Discovery** | Dynamic service registration and lookup via Eureka Server |
+| **API Gateway Pattern** | Unified entry point for edge routing, security, and documentation |
+| **Inter-Service Communication** | Synchronous (Feign) and Asynchronous (Kafka) patterns |
+| **Centralized Security** | IAM integration using Keycloak and OAuth2/OIDC |
+| **Event-Driven Architecture** | Decoupled processing using message brokers (Kafka) |
+| **Resilience Patterns** | Circuit Breakers and Retries (Resilience4j) for fault tolerance |
+| **Observability** | Centralized logs (Loki), traces (Tempo), and metrics (Prometheus) |
+| **Database per Service** | Data isolation and autonomy for independent scaling |
+| **Centralized API Docs** | Aggregated Swagger/OpenAPI documentation at the gateway level |
+| **Containerization** | Packaging and orchestration using Docker and Kubernetes |
+| **Integration Testing** | Robust testing using WireMock and Testcontainers |
 
 ---
 
