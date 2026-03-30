@@ -29,6 +29,10 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 # 🛠 Tech Stack
 
+> **[NOTE]** check out **refactor/feign-to-http-interface** branch to see the refactored code
+> its a more modern and recommended way to handle inter-service communication in Spring Boot
+
+
 ### Backend
 - **Java 21**
 - **Spring Boot 3** <sub>*(Spring Web, Spring Data JPA, Lombok)*</sub>
