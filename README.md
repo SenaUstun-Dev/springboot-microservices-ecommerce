@@ -38,7 +38,7 @@ The main purpose of this project is to gain hands-on experience with everything 
 - **Spring Boot 3** <sub>*(Spring Web, Spring Data JPA, Lombok)*</sub>
 - **Spring Cloud Gateway MVC** <sub>*(API Gateway)*</sub>
 - **Spring Cloud Eureka** <sub>*(Service Discovery)*</sub>
-- **Spring Cloud OpenFeign** <sub>*(REST Client)*</sub>
+- **Spring Cloud OpenFeign** <sub>*(REST Client)*</sub>  (refctored in branch **refactor/feign-to-http-interface**)
 - **Resilience4j** <sub>*(Circuit Breaker & Retries)*</sub>
 - **Flyway** <sub>*(Database Migrations)*</sub>
 - **Swagger (OpenAPI) v3** <sub>*(API Documentation)*</sub>
