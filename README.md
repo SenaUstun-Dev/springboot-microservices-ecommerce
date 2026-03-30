@@ -75,18 +75,18 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 This project demonstrates several distributed system patterns and modern engineering practices:
 
-- **Microservices Architecture** <sub>*(Decoupled, specialized services serving specific business domains)*</sub>
-- **Service Discovery** <sub>*(Dynamic service registration and lookup via Eureka Server)*</sub>
-- **API Gateway Pattern** <sub>*(Unified entry point for edge routing, security, and documentation)*</sub>
-- **Inter-Service Communication** <sub>*(Synchronous via Feign and Asynchronous via Kafka)*</sub>
-- **Centralized Security** <sub>*(IAM integration using Keycloak and OAuth2/OIDC)*</sub>
-- **Event-Driven Architecture** <sub>*(Decoupled processing using message brokers like Kafka)*</sub>
-- **Resilience Patterns** <sub>*(Circuit Breakers and Retries using Resilience4j)*</sub>
-- **Observability** <sub>*(Centralized logs, distributed tracing, and metrics)*</sub>
-- **Database per Service** <sub>*(Ensuring data isolation and autonomy for each service)*</sub>
-- **Centralized API Docs** <sub>*(Aggregated OpenAPI documentation at the gateway level)*</sub>
-- **Containerization** <sub>*(Packaging and orchestration using Docker and Kubernetes)*</sub>
-- **Integration Testing** <sub>*(Robust testing using WireMock and Testcontainers)*</sub>
+- **Microservices Architecture**
+- **Service Discovery** <sub>*(Dynamic registration and lookup via Eureka)*</sub>
+- **API Gateway Pattern**
+- **Inter-Service Communication** <sub>*(Synchronous via Feign & Asynchronous via Kafka)*</sub>
+- **Centralized Security** <sub>*(Auth integration via Keycloak & OAuth2)*</sub>
+- **Event-Driven Architecture** <sub>*(Asynchronous processing using Kafka)*</sub>
+- **Resilience Patterns** <sub>*(Fault tolerance via Resilience4j)*</sub>
+- **Observability** <sub>*(Centralized logs, metrics, and tracing)*</sub>
+- **Database per Service**
+- **Centralized API Docs** <sub>*(Gateway-level aggregation)*</sub>
+- **Containerization**
+- **Integration Testing** <sub>*(Automated tests with WireMock and Testcontainers)*</sub>
 
 ---
 
@@ -108,17 +108,19 @@ springboot-microservices-ecommerce
 └── kubernetes (planned)
 ```
 
-Some modules may **not yet exist in the repository** and will be **added as development continues**.
+🚧Some modules may **not yet exist in the repository** and will be **added as development continues**.
 
 ---
 
 # ⚙️ Architecture Flow
 
-**will be added later**
+**🚧 will be added later**
 
 ---
 
 # 🔧 Services
+
+🚧 this section is being actively updated as development continues
 
 ## API Gateway
 
