@@ -1,5 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.updateBuildConfiguration": "automatic",
     "maven.view": "flat",
     "java.compile.nullAnalysis.mode": "automatic"
 }
