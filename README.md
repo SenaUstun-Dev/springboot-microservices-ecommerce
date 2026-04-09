@@ -49,7 +49,7 @@ The main purpose of this project is to gain hands-on experience with everything 
 - **PostgreSQL**
 
 ### Messaging
-- **Apache Kafka** <sub>*(Event-Driven Messaging)*</sub>
+- **Apache Kafka (Kraft)** <sub>*(Event-Driven Messaging)*</sub>
 
 ### Frontend
 - **Angular**
@@ -180,6 +180,7 @@ Technology:
 - Feign Client (for GET /api/inventories)
 - Flyway
 - Swagger
+- Kafka
 
 ---
 
@@ -206,6 +207,7 @@ Responsibilities:
 
 Technologies:
 (will be added later)
+- Kafka
 
 ---
 
