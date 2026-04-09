@@ -103,7 +103,7 @@ springboot-microservices-ecommerce
 ├── product-service
 ├── order-service
 ├── inventory-service
-├── notification-service (planned)
+├── notification-service
 │
 ├── frontend (planned)
 │
@@ -200,7 +200,7 @@ Technology:
 
 ---
 
-## Notification Service(planned)
+## Notification Service
 
 Responsibilities:
 (will be added later)
