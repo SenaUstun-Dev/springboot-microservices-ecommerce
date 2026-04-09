@@ -13,6 +13,9 @@ import org.springframework.context.annotation.Import;
 import org.wiremock.spring.ConfigureWireMock;
 import org.wiremock.spring.EnableWireMock;
 
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.kafka.core.KafkaTemplate;
+import com.github.senaustundev.order_service.event.OrderPlacedEvent;
 import com.github.senaustundev.order_service.repository.OrderRepository;
 import com.github.senaustundev.order_service.stubs.InventoryClientStub;
 
@@ -20,9 +23,11 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 @Import(TestcontainersConfiguration.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {
+		"inventory.url=http://localhost:${inventory-service.port}"
+})
 @EnableWireMock({
-		@ConfigureWireMock(name = "inventory", portProperties = "wiremock.server.port")
+		@ConfigureWireMock(name = "inventory-service", portProperties = "inventory-service.port")
 })
 class OrderServiceApplicationTests {
 
@@ -31,6 +36,9 @@ class OrderServiceApplicationTests {
 
 	@Autowired
 	private OrderRepository orderRepository;
+
+	@MockitoBean
+	private KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
 	@BeforeEach
 	void setup() {
@@ -48,9 +56,15 @@ class OrderServiceApplicationTests {
 	void shouldPlaceOrder() {
 		String requestBody = """
 				{
+					"orderNumber": "ORD-123",
 					"skuCode": "iphone_15",
 					"price": 45000,
-					"quantity": 1
+					"quantity": 1,
+					"userDetails": {
+						"email": "test@test.com",
+						"firstName": "John",
+						"lastName": "Doe"
+					}
 				}
 				""";
 		InventoryClientStub.stubInventoryCall("iphone_15", 1);
@@ -72,7 +86,12 @@ class OrderServiceApplicationTests {
 				{
 					"skuCode": "iphone_15",
 					"price": "not_a_number",
-					"quantity": 1
+					"quantity": 1,
+					"userDetails": {
+						"email": "test@test.com",
+						"firstName": "John",
+						"lastName": "Doe"
+					}
 				}
 				""";
 
@@ -95,7 +114,12 @@ class OrderServiceApplicationTests {
 				{
 					"skuCode": "iphone_15",
 					"price": 45000,
-					"quantity": 0
+					"quantity": 0,
+					"userDetails": {
+						"email": "test@test.com",
+						"firstName": "John",
+						"lastName": "Doe"
+					}
 				}
 				""";
 
@@ -118,7 +142,12 @@ class OrderServiceApplicationTests {
 				{
 					"skuCode": "",
 					"price": 10.00,
-					"quantity": 1
+					"quantity": 1,
+					"userDetails": {
+						"email": "test@test.com",
+						"firstName": "John",
+						"lastName": "Doe"
+					}
 				}
 				""";
 
