@@ -148,3 +148,16 @@ services:
       - "4317:4317"   # OTLP gRPC
       - "4318:4318"   # OTLP HTTP
     restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:11.5.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./docker/grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_BASIC_ENABLED=false
+    restart: unless-stopped
