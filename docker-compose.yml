@@ -127,3 +127,12 @@ services:
       - ./docker/loki/loki-config.yaml:/etc/loki/local-config.yaml
     command: -config.file=/etc/loki/local-config.yaml
     restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.2
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
