@@ -136,6 +136,10 @@
 			<version>5.5.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.github.loki4j</groupId>
+			<artifactId>loki-logback-appender</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
