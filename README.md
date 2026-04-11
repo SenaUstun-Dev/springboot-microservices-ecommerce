@@ -203,11 +203,11 @@ Technology:
 ## Notification Service
 
 Responsibilities:
-(will be added later)
+-send notifications to users (everytime when order is placed)
 
 Technologies:
-(will be added later)
 - Kafka
+- Spring Email
 
 ---
 
