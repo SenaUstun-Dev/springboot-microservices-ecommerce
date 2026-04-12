@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Spring Boot default logback configuration for console output -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
-    <springProperty scope="local" name="appName" source="spring.application.name" defaultValue="unknown-service"/>
-    <springProperty scope="local" name="lokiUrl" source="app.loki.url" defaultValue="http://localhost:3100/loki/api/v1/push"/>
+    <springProperty scope="context" name="appName" source="spring.application.name" defaultValue="unknown-service"/>
+    <springProperty scope="context" name="lokiUrl" source="app.loki.url" defaultValue="http://localhost:3100/loki/api/v1/push"/>
 
-    <!-- Loki4j 2.x Appender -->
     <appender name="LOKI" class="com.github.loki4j.logback.Loki4jAppender">
         <http>
             <url>${lokiUrl}</url>
         </http>
 
-        <format>
-            <label>
-                <pattern>application=${appName},level=%level,host=${HOSTNAME},traceId=%X{traceId:-}</pattern>
-            </label>
-            <message>
-                <pattern>{"timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}","level":"%level","thread":"%thread","logger":"%logger{36}","message":"%msg","traceId":"%X{traceId:-}"}%n</pattern>
-            </message>
-            <sortByTime>true</sortByTime>
-        </format>
+        <!-- Loki4j 2.x correct layout -->
+        <labels>
+            application=${appName:-unknown-service}
+            level=%level
+            host=${HOSTNAME}
+            traceId=%X{traceId:-}
+        </labels>
+
+        <message>
+            <pattern>{"timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}","level":"%level","thread":"%thread","logger":"%logger{36}","message":"%msg","traceId":"%X{traceId:-}"}%n</pattern>
+        </message>
 
         <batch>
-            <batchSize>1000</batchSize>
-            <batchTimeoutMs>5000</batchTimeoutMs>
-            <maxRetries>3</maxRetries>
+            <maxItems>1000</maxItems>
+            <timeoutMs>5000</timeoutMs>
         </batch>
     </appender>
 
-    <!-- Async wrapper for performance -->
     <appender name="ASYNC_LOKI" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="LOKI"/>
         <queueSize>512</queueSize>
         <discardingThreshold>0</discardingThreshold>
     </appender>
 
-    <!-- Root Logger -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ASYNC_LOKI"/>
