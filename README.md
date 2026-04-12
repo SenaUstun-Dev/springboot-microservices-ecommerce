@@ -138,6 +138,7 @@ Technology:
 - Keycloak
 - Docker
 - Swagger
+- Grafana Stack (Prometheus, Grafana, Loki, Tempo)
 
 ---
 ## Eureka Server
@@ -163,6 +164,7 @@ Technology:
 - MongoDB
 - Docker
 - Swagger
+- Grafana Stack (Prometheus, Grafana, Loki, Tempo)
 
 ---
 
@@ -181,6 +183,7 @@ Technology:
 - Flyway
 - Swagger
 - Kafka
+- Grafana Stack (Prometheus, Grafana, Loki, Tempo)
 
 ---
 
@@ -197,6 +200,7 @@ Technology:
 - Docker
 - Flyway
 - Swagger
+- Grafana Stack (Prometheus, Grafana, Loki, Tempo)
 
 ---
 
@@ -208,6 +212,7 @@ Responsibilities:
 Technologies:
 - Kafka
 - Spring Email
+- Grafana Stack (Prometheus, Grafana, Loki, Tempo)
 
 ---
 
