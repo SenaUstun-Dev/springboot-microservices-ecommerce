@@ -20,7 +20,9 @@ import static org.mockito.Mockito.verify;
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {
-                "spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer"
+                "spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer",
+                "management.health.mail.enabled=false",
+                "eureka.client.enabled=false"
         })
 class NotificationServiceIntegrationTest {
 
