@@ -86,8 +86,18 @@
 						</exclude>
 					</excludes>
 					<image>
-						<name>senaustun/${project.artifactId}</name>
+						<name>senaustundev/${project.artifactId}</name>
+						<publish>true</publish>
+						<env>
+							<BP_JVM_VERSION>21</BP_JVM_VERSION>
+						</env>
 					</image>
+					<docker>
+						<publishRegistry>
+							<username>senaustundev</username>
+							<password>${dockerPassword}</password>
+						</publishRegistry>
+					</docker>
 				</configuration>
 			</plugin>
 		</plugins>
