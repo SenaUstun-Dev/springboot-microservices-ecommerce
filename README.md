@@ -1,10 +1,4 @@
 # springboot-microservices-ecommerce
-# 🚧 Work in Progress
-
-This project is currently **under active development**. Not everything down there is implemented yet.  
-
----
-
 # 🧩 Spring Boot Microservices Architecture Practice
 
 Below this readme has:
@@ -105,15 +99,12 @@ springboot-microservices-ecommerce
 ├── inventory-service
 ├── notification-service
 │
-├── frontend (planned)
+├── frontend (maybe will be added later)
 │
 ├── eureka-server
 ├── docker
-└── kubernetes (planned)
+└── k8s 
 ```
-
-🚧Some modules may **not yet exist in the repository** and will be **added as development continues**.
-
 ---
 
 # ⚙️ Architecture Flow
@@ -123,9 +114,6 @@ springboot-microservices-ecommerce
 ---
 
 # 🔧 Services
-
-🚧 this section is being actively updated as development continues
-
 ## API Gateway
 
 Responsibilities:
@@ -216,7 +204,7 @@ Technologies:
 
 ---
 
-## Frontend(planned)
+## Frontend(maybe will be added later)
 
 Features:
 (will be added later)
