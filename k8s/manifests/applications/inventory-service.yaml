@@ -15,6 +15,7 @@ spec:
       containers:
         - name: inventory-service
           image: senaustundev/inventory-service:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8082
           envFrom:

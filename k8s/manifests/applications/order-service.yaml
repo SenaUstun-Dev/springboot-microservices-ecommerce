@@ -15,6 +15,7 @@ spec:
       containers:
         - name: order-service
           image: senaustundev/order-service:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8081
           envFrom:

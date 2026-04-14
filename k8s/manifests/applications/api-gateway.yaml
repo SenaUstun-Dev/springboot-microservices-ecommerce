@@ -15,6 +15,7 @@ spec:
       containers:
         - name: api-gateway
           image: senaustundev/api-gateway:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 9000
           envFrom:

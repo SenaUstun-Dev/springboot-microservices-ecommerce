@@ -15,6 +15,7 @@ spec:
       containers:
         - name: eureka-server
           image: senaustundev/eureka-server:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8761
           envFrom:

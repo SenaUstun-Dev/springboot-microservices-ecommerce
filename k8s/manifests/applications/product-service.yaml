@@ -15,6 +15,7 @@ spec:
       containers:
         - name: product-service
           image: senaustundev/product-service:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           envFrom:
