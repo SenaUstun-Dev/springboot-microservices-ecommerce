@@ -99,7 +99,7 @@ springboot-microservices-ecommerce
 ├── inventory-service
 ├── notification-service
 │
-├── frontend (maybe will be added later)
+├── frontend (might or might not be added later)
 │
 ├── eureka-server
 ├── docker
@@ -204,10 +204,7 @@ Technologies:
 
 ---
 
-## Frontend(maybe will be added later)
-
-Features:
-(will be added later)
+## Frontend(might or might not be added later)
 
 Technologies:
 - Angular
