@@ -87,7 +87,7 @@
 					</excludes>
 					<image>
 						<name>senaustundev/${project.artifactId}</name>
-						<publish>true</publish>
+						<publish>false</publish>
 						<env>
 							<BP_JVM_VERSION>21</BP_JVM_VERSION>
 						</env>

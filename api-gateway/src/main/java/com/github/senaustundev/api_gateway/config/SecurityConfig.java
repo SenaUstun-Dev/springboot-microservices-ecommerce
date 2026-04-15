@@ -4,11 +4,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
+import org.springframework.security.oauth2.core.OAuth2TokenValidator;
+import org.springframework.security.oauth2.jwt.*;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,6 +24,10 @@ import java.util.List;
 @Configuration
 @Profile("!test")
 public class SecurityConfig {
+
+        @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
+        private String jwkSetUri;
+
 
         private final String[] freeResourceUrls = {
                         "/swagger-ui.html",
@@ -52,6 +60,31 @@ public class SecurityConfig {
                                 // Disable CSRF for stateless REST APIs
                                 .csrf(AbstractHttpConfigurer::disable)
                                 .build();
+        }
+
+        @Bean
+        public JwtDecoder jwtDecoder() {
+                NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+
+                // WE BEAT THE 401: Allow both the external and internal issuer strings if needed, 
+                // but primarily we accept whatever String we expect to see in the token.
+                OAuth2TokenValidator<Jwt> withIssuer = new JwtIssuerValidator("http://localhost:8181/realms/springboot-microservices-ecommerce-security-realm");
+                OAuth2TokenValidator<Jwt> withTimestamp = new JwtTimestampValidator();
+                OAuth2TokenValidator<Jwt> validator = new DelegatingOAuth2TokenValidator<>(withTimestamp, withIssuer);
+
+                jwtDecoder.setJwtValidator(validator);
+                return jwtDecoder;
+        }
+
+
+        @Bean
+        public WebSecurityCustomizer webSecurityCustomizer() {
+                return web -> web.ignoring().requestMatchers(
+                                "/swagger-ui/**",
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**",
+                                "/aggregate/**",
+                                "/actuator/**");
         }
 
         // This is the key modernization: extract roles from Keycloak's token structure
