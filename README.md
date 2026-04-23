@@ -1,4 +1,3 @@
-# springboot-microservices-ecommerce
 # 🧩 Spring Boot Microservices Architecture Practice
 
 Below this readme has:
@@ -44,9 +43,6 @@ The main purpose of this project is to gain hands-on experience with everything 
 
 ### Messaging
 - **Apache Kafka (Kraft)** <sub>*(Event-Driven Messaging)*</sub>
-
-### Frontend
-- **Angular**
 
 ### Observability (Grafana Stack)
 - **Prometheus** <sub>*(Metrics)*</sub>
